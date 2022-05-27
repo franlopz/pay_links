@@ -1,0 +1,23 @@
+.list{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0px;
+}
+
+.list > li {
+    flex-grow: 1;
+    margin: 10px;
+}
+
+.list > li >button {
+    width: 100%;
+  color: black;
+  border-width: 0px;
+  background-color: transparent;
+}
+
+.active{
+    border: solid #fdda24;
+    border-width: 0 0 5px 0;
+}

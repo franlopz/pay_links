@@ -6,7 +6,7 @@ const usePayLink = () => {
   const [linksData, setLinksData] = useState(null)
 
   const getLinks = async ({ startDate, endDate }) => {
-    let payDataArray = []
+    let payDataObject = { created: [], sent: [] }
     let startDateString = [
       startDate.getFullYear(),
       startDate.getMonth() + 1,
@@ -27,16 +27,18 @@ const usePayLink = () => {
       })
     )
     for (let item of response.data.getTasks) {
+      let status = ''
       let linkDetails = { date: item.startDate, id: item.id }
       for (let data of item.customData) {
         let key = Object.values(data)[0]
         let value = Object.values(data)[1]
         linkDetails[key] = value
+        if (key === 'status') status = value
       }
-      console.log(payDataArray)
-      payDataArray.push(linkDetails)
+      if (status === 'created') payDataObject.created.push(linkDetails)
+      if (status === 'sent') payDataObject.sent.push(linkDetails)
     }
-    setLinksData(payDataArray)
+    setLinksData(payDataObject)
   }
 
   const updateLinkStatus = async ({ id, value }) => {
