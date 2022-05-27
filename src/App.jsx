@@ -1,11 +1,11 @@
 import './App.css'
 import Links from './pages/Links'
-
+import { AppContextProvider } from './context/DateRangeContext'
 function App() {
   return (
-    <div>
+    <AppContextProvider>
       <Links />
-    </div>
+    </AppContextProvider>
   )
 }
 

@@ -1,12 +1,8 @@
+import { DateRangeContext } from '@/context/DateRangeContext'
+import encodeUrl from '@/helpers/encodeUrl'
 import { formatDateDashES } from '@/helpers/formatDate'
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './Container.module.css'
-
-const encodeUrl = ({ url, phone }) => {
-  const encodedText = encodeURIComponent(`Este es su enlace de pago: ${url}`)
-  const newUrl = `https://wa.me/${phone}/?text=${encodedText}`
-  if (encodedText) return newUrl
-}
 
 const Container = ({
   customer,
@@ -17,11 +13,14 @@ const Container = ({
   orders,
   status,
   url,
+  updateLink,
+  getLinks,
 }) => {
+  const { startDate, endDate } = useContext(DateRangeContext)
+
   const linkAction = {
     created: 'Enviar',
-    sent: 'Verificar',
-    paid: 'Pagado',
+    sent: 'Reenviar',
   }
 
   const buttonClass = {
@@ -30,9 +29,12 @@ const Container = ({
     paid: `${styles['button']} ${styles['paid']}`,
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     window.open(encodeUrl({ url, phone }))
+    await updateLink({ id: id, value: 'sent' })
+    await getLinks({ startDate, endDate })
   }
+
   if (!url) return null
   return (
     <div className={styles.container}>

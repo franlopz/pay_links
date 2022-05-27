@@ -5,7 +5,7 @@ const gqlQuery = async (query, token, options = {}) => {
   const { timeout = 10000 } = options
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeout)
-  const URL = import.meta.env.VITE_BASE_URL
+  const URL = `http://${window.location.hostname}:9000/api/graphql`
 
   const body = {
     query: query,

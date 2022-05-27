@@ -1,5 +1,5 @@
 const authSamba = async () => {
-  const URL_AUTH = import.meta.env.VITE_AUTH_URL
+  const URL_AUTH = `http://${window.location.hostname}:9000/Token`
   const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
   let authedSamba = window.localStorage.getItem('authedSamba')
