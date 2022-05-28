@@ -1,20 +1,28 @@
 import Container from '@/components/Container/Container'
 import DatePicker from '@/components/DatePicker/DatePicker'
+import RefreshButton from '@/components/DatePicker/RefreshButton'
 import Tabs from '@/components/Tabs/Tabs'
 import { DateRangeContext } from '@/context/DateRangeContext'
 import usePayLink from '@/hooks/usePayLink'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Links.module.css'
 const Links = () => {
-  const { linksData, updateLinkStatus, getLinks } = usePayLink(null)
+  const { linksData, updateLinkStatus, getLinks, loading } = usePayLink(null)
+  const { startDate, endDate } = useContext(DateRangeContext)
   const [data, setData] = useState([])
   if (!linksData) {
     return null
   }
+  console.log(loading)
   return (
     <div className={styles.body}>
       <div>
-        <DatePicker action={getLinks} />
+        <DatePicker>
+          <RefreshButton
+            loading={loading}
+            onClick={() => getLinks({ startDate, endDate })}
+          />
+        </DatePicker>
         <Tabs data={linksData} setData={setData} />
         <div className={styles.container}>
           {data.length === 0 && (

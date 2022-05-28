@@ -3,21 +3,30 @@
     flex-direction: row;
     list-style-type: none;
     padding: 0px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
 .list > li {
     flex-grow: 1;
-    margin: 10px;
+    margin: 0px 10px 0px 10px;
+    height: 100%;
 }
 
 .list > li >button {
+    height: 100%;
     width: 100%;
   color: black;
   border-width: 0px;
+  margin: 0px;
   background-color: transparent;
+  cursor:pointer;
+    font-size: 1rem;
+  
 }
 
 .active{
     border: solid #fdda24;
-    border-width: 0 0 5px 0;
+    border-width: 0 0 3px 0;
 }

@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react'
 
 const usePayLink = () => {
   const [linksData, setLinksData] = useState(null)
-
+  const [loading, setLoading] = useState(false)
   const getLinks = async ({ startDate, endDate }) => {
+    setLoading(true)
     let payDataObject = { created: [], sent: [] }
     let startDateString = [
       startDate.getFullYear(),
@@ -38,11 +39,14 @@ const usePayLink = () => {
       if (status === 'created') payDataObject.created.push(linkDetails)
       if (status === 'sent') payDataObject.sent.push(linkDetails)
     }
+    setLoading(false)
     setLinksData(payDataObject)
   }
 
   const updateLinkStatus = async ({ id, value }) => {
+    setLoading(true)
     await gqlQuery(updateTask({ id: id, name: 'status', value: value }))
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const usePayLink = () => {
     getLinks({ startDate: today, endDate: today })
   }, [])
 
-  return { linksData, updateLinkStatus, getLinks }
+  return { linksData, updateLinkStatus, getLinks, loading }
 }
 
 export default usePayLink
