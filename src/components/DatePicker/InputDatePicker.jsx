@@ -3,7 +3,13 @@ import styles from './DatePicker.module.css'
 
 const InputDatePicker = forwardRef(({ ...props }, ref) => (
   <div className={styles['input-container']}>
-    <input type="text" {...props} ref={ref} readOnly />
+    <input
+      data-testid="date-picker-input"
+      type="text"
+      {...props}
+      ref={ref}
+      readOnly
+    />
     <label>{props.labeltext}</label>
   </div>
 ))

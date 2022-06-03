@@ -7,13 +7,10 @@ import usePayLink from '@/hooks/usePayLink'
 import React, { useContext, useState } from 'react'
 import styles from './Links.module.css'
 const Links = () => {
-  const { linksData, updateLinkStatus, getLinks, loading } = usePayLink(null)
+  const { linksData, updateLinkStatus, getLinks, loading } = usePayLink()
   const { startDate, endDate } = useContext(DateRangeContext)
   const [data, setData] = useState([])
-  if (!linksData) {
-    return null
-  }
-  console.log(loading)
+
   return (
     <div className={styles.body}>
       <div>

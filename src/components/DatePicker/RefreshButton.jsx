@@ -1,9 +1,19 @@
-import React from 'react'
+import { DateRangeContext } from '@/context/DateRangeContext'
+import React, { useContext } from 'react'
 import styles from './DatePicker.module.css'
 
 const RefreshButton = ({ onClick, loading = false }) => {
+  const { startDate, endDate } = useContext(DateRangeContext)
   return (
-    <button className={styles['icon-container']} onClick={onClick}>
+    <button
+      disabled={startDate && endDate ? false : true}
+      className={
+        startDate && endDate
+          ? styles['icon-container']
+          : styles['icon-container-disabled']
+      }
+      onClick={onClick}
+    >
       <svg
         className={`${styles['svg-icon']} ${loading ? styles.loading : ''}`}
         viewBox="0 0 20 20"

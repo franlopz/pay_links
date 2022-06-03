@@ -8,7 +8,7 @@ import InputDatePicker from './InputDatePicker'
 import RefreshButton from './RefreshButton'
 import { DateRangeContext } from '@/context/DateRangeContext'
 
-const DatePicker = ({ action, children }) => {
+const DatePicker = ({ children }) => {
   const { startDate, endDate, setDateRange } = useContext(DateRangeContext)
   const ref = useRef()
   return (

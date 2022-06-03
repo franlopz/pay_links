@@ -67,12 +67,6 @@
     fill: #4691f6;
   }
     
-  .svg-icon:active path,
-  .svg-icon polygon,
-  .svg-icon rect {
-    animation: press 0.2s 1 linear;
-  }
-  
   .svg-icon circle {
     stroke: #4691f6;
     stroke-width: 1;
@@ -98,6 +92,21 @@
   }
   .icon-container:active svg:last-child {
     animation: bounce 0.2s 1 linear;
+  }
+  
+  .icon-container-disabled {
+    position: relative;
+    margin: 0px 13px 0px 13px;
+    opacity: 60%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0px 5px 5px 0 #ababab4d;
+    border: none;
   }
 
   @keyframes press {
